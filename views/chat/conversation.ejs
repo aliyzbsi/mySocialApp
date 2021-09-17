@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+
+    <title>ANASAYFA</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="assets/css/style.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+    <div class="right-console d-flex justify-content-end position-absolute">
+        <form class="d-flex">
+
+            <% if( !currentUser){ %>
+                <button class="btn btn-primary" type="button" onClick="location.href='/signin'">GİRİŞ YAP</button>
+
+                <button class="btn btn-primary" style="margin-left: 5px;" type="button"
+                    onClick="location.href='/signup'">KAYIT OL</button>
+                <% }else { %>
+
+                    <% if( currentUser){ %>
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" id="dropdownMenuButton1"
+                                data-bs-toggle="dropdown" aria-expanded="false" style="margin-left: 5px;"
+                                type="button"><i class='bx bx-user-circle' style="font-size: x-large;"></i>
+                                <%= currentUser.userName %>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li>
+                                    <a class=" dropdown-item" href="/myblog"><i class='bx bxs-book'></i></i>
+                                        BLOGLARIM</a>
+                                </li>
+                                <li>
+                                    <a class=" dropdown-item" href="/myCv"><i class='bx bx-receipt'></i> ÖZGEÇMİŞİM</a>
+                                </li>
+                                <li>
+                                    <a class=" dropdown-item" href="/toDoListe"><i class='bx bxs-plus-circle'></i> YENİ
+                                        PLAN OLUŞTUR</a>
+                                </li>
+                                <li>
+                                    <a class=" dropdown-item" href="/addnewblog"><i class='bx bxs-file-plus'></i> BLOG
+                                        EKLE</a>
+                                </li>
+
+
+                                <li>
+                                    <a class=" dropdown-item" href="/signout"><i class='bx bxs-user-x'></i> ÇIKIŞ
+                                        YAP</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <% } %>
+
+                            <% } %>
+        </form>
+    </div>
+
+    <!-- ======= Mobile nav toggle button ======= -->
+    <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
+
+    <!-- ======= Header ======= -->
+    <header id="header">
+
+        <div class="d-flex flex-column">
+
+            <div class="profile">
+
+                <img src="assets/img/profile-img.jpg" alt="" class="img-fluid rounded-circle">
+                <h1 class="text-light"><a href="index.html">ALİ YÜZBAŞI</a></h1>
+                <div class="social-links mt-3 text-center">
+                    <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                    <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                    <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                    <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                    <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+
+
+                </div>
+
+            </div>
+
+            <nav id="navbar" class="nav-menu navbar">
+
+                <ul>
+                    <li><a href="/" class="nav-link scrollto active"><i class="bx bx-home"></i>
+                            <span>ANASAYFA</span></a></li>
+                    <li><a href="/about" class="nav-link scrollto"><i class="bx bx-user"></i> <span>HAKKINDA</span></a>
+                    </li>
+
+                    <li><a href="/allBlog" class="nav-link scrollto"><i class="bx bx-book-content"></i>
+                            <span>BLOGLAR</span></a></li>
+                    <li><a href="/allCv" class="nav-link scrollto"><i class="bx bx-file-blank"></i>
+                            <span>CVLER</span></a></li>
+                    <li><a href="/contact" class="nav-link scrollto"><i class="bx bx-envelope"></i>
+                            <span>İLETİŞİM</span></a></li>
+
+
+                </ul>
+
+            </nav><!-- .nav-menu -->
+        </div>
+
+    </header><!-- End Header -->
+
+    <main id="main">
+        <section id="breadcrumbs" class="breadcrumbs">
+            <div class="container">
+
+                <div class="d-flex justify-content-between align-items-center">
+                    <h2>MESAJLAR</h2>
+
+                </div>
+
+            </div>
+        </section><!-- End Breadcrumbs -->
+        <section id="myblog" class="myblog" style="padding-top: 20px;padding: 19px 0;">
+            <div class="container">
+
+                <div class="messenger">
+                    <div class="chatMenu">
+                        <div class="chatMenuWrapper">
+                            <input placeholder="Ara" class="chatMenuInput" />
+                            <% foundUsers.forEach((user)=>{ %>
+                            <% foundCv.forEach((image)=>{ %> 
+                                
+                                      <% foundMessages.forEach((messages)=>{ %>
+                                    <div class="conversation"  id="personMessage" style="margin-top: 40px;">
+                                        <a href="/<%= messages._id %>"></a>
+                                        <img class="conversationImg"
+                                            src="/files/<%=image.myImage%>"  alt="" />
+                                        <span class="convertionName"><%= user.firstName %> <%= user.lastName %>
+                                          
+                                                <p class="textmessage" ><%= messages.text %> 
+                                                </p>
+                                        </span>
+                                        
+                                    </div>
+                                   
+                                        <% }); %> 
+                                    <%}); %>
+                                    <%}); %>
+
+                                    
+                           
+                        </div>
+                    </div>   
+
+
+
+                    <div class="chatOnline">
+                       
+                        <div class="chatOnlineWrapper">
+                            <% foundCv.forEach((image)=>{ %> 
+                                <div class="chatOnlineFriend">
+                                     
+                                    <div class="chatOnlineImgContainer">
+                                        
+                                        <img class="chatOnlineImg" src="/files/<%=image.myImage%>" alt="">
+                                       
+                                        <div class="chatOnlineBadge"></div>
+                                    </div>
+                                    <span class="chatOnlineName">John Doe</span>
+                                </div>
+                               <% }); %>
+                                
+                                
+                                
+                            </div>
+                        </div>
+                        
+                    </div>
+                </form>
+
+
+
+                </div>
+
+
+        </section>
+
+
+
+
+
+
+
+
+    </main><!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="container">
+            <div class="copyright">
+                &copy; Copyright <strong><span>iPortfolio</span></strong>
+            </div>
+            <div class="credits">
+                <!-- All the links in the footer should remain intact. -->
+                <!-- You can delete the links only if you purchased the pro version. -->
+                <!-- Licensing information: https://bootstrapmade.com/license/ -->
+                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/iportfolio-bootstrap-portfolio-websites-template/ -->
+                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+            </div>
+        </div>
+    </footer><!-- End  Footer -->
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Vendor JS Files -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="assets/vendor/aos/aos.js"></script>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+    <script src="assets/vendor/purecounter/purecounter.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/vendor/typed.js/typed.min.js"></script>
+    <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.3/socket.io.js"
+    integrity="sha512-PU5S6BA03fRv1Q5fpwXjg5nlRrgdoguZ74urFInkbABMCENyx5oP3hrDzYMMPh3qdLdknIvrGj3yqZ4JuU7Nag=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Template Main JS File -->
+    <script src="assets/js/main.js"></script>
+
+
+                  
+    <script>
+
+socket = io ();
+const chatForm = document.getElementById('chat-form');
+const chatMessages = document.querySelector('.chat-messages');
+
+/*
+const {username, room} = Qs.parse(location.search, {
+    ignoreQueryPrefix:true
+});
+*/
+$("#submit").click(()=>{
+    var text=$()
+})
+
+let members=[];
+
+// socket.emit('userDetails',{fromUser,toUser});
+document.addEventListener("click",()=>{
+    $("#personMessage").click(()=>{
+      
+    element = document.querySelectorAll(".chat-messages");
+    socket.emit("userDetails",{members});
+         
+        let data={
+            members:members,
+            
+        }
+
+    $.ajax({
+          url: '/messages/<%=foundMessages._id%>',
+          type: 'GET',
+          data: members
+        });
+    
+    })
+    
+   
+})
+
+
+
+function storeDetails() {
+    
+   
+    element = document.querySelectorAll(".chat-messages");
+    socket.emit('userDetails',{fromUser,toUser}); //kurulan sohbetin ayrıntılarını yayar
+
+}
+
+$(document).ready(function(){
+    
+    $("#submit").click(function(){
+
+    });
+
+});
+
+function storeTo() {
+    
+    console.log(toUser);
+}
+
+
+
+//Mesajı gönder
+
+chatForm.addEventListener('submit', (e) => {
+    e.preventDefault(); //Bir dosyaya varsayılan günlüğe kaydetmeyi önler
+
+
+    const msg = e.target.elements.msg.value;
+    final = {
+        'senderId':senderId,
+        'receiverId':members,
+        'msg':msg
+    };
+    socket.emit('chatMessage',final); //gönderici ve alıcı ile birlikte sunucuya sohbet mesajı yayar
+
+    document.getElementById('msg').value=" ";
+});
+
+socket.on('output',(data) =>{
+    console.log(data);
+});
+
+socket.on('output',(data) => { //iki kullanıcı arasında oturum açtıktan sonra tüm sohbet geçmişini alır ve görüntüler
+    for(var i=0; i<data.length;i++) {
+        outputMessage(data[i]);
+    }
+    chatMessages.scrollTop=chatMessages.scrollHeight;
+});
+
+socket.on('message',(data) => { //bir mesaj alır ve görüntüler
+
+        outputMessage(data);
+        console.log(data);
+    chatMessages.scrollTop=chatMessages.scrollHeight;
+});
+
+function outputMessage(message) {
+    const div = document.createElement('div');
+    div.classList.add('message');
+    div.innerHTML=`<p class="meta">${message.from}<span> ${message.time}, ${message.date}</span></p>
+    <p class ="text">
+        ${message.message}
+    </p>`;
+    document.querySelector('.chat-messages').appendChild(div);
+}
+        
+        
+        
+        //     var io = io('http://localhost:3000');
+        
+        
+        //     function enterName(){
+        
+        //         const sender = document.getElementById('sender').value;
+        
+        //         io.emit("user_connected", sender);
+        
+        //         return false;
+        
+        //     }
+        
+        
+        //     io.on("user_connected",(username)=>{
+        
+        //         console.log(username);
+        
+        //     });
+        
+        
+        
+        //     const submitBtn = document.getElementById('submitBtn')
+        //   const output = document.getElementById('output')
+        //   const feedback = document.getElementById('feedback')
+        
+        //   submitBtn.addEventListener('click', () => {
+        //     socket.emit('chat', {
+        //       message: message.value,
+        //       sender: sender.value
+        //     })
+        
+        //   })
+        
+        
+        //   socket.on('chat', data => {
+        //     feedback.innerHTML='';
+        //     output.innerHTML += '<p><strong>' + data.sender + ': </strong>' + data.message + ' </p>'
+        //     message.value=" ";
+        //   })
+        
+        
+        
+        //   message.addEventListener('keypress',()=>{
+        //     socket.emit('typing',sender.value)
+        //   })
+        //   socket.on('typing',data=>{
+        //     feedback.innerHTML= "<p>"+ data + " yazıyor ...</p>"
+        //   })
+        
+        
+    </script>
+
+
+</body>
+
+</html>
